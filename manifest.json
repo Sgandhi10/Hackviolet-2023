@@ -3,9 +3,8 @@
   "name": "Hello Extensions",
   "description": "Base Level Extension",
   "version": "1.0",
-  "permissions" : [
+  "permissions": [
     "tabs"
-    
   ],
   "action": {
     "default_popup": "hello.html",
