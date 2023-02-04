@@ -22,18 +22,7 @@ async function getCommittee(){
     console.log(response.choices[0].text);
 }
 
-function sendtoAI(domContent) {
+chrome.runtime.onMessage.addListener(function (domContent) {
     console.log(domContent)
-    // let json_data = {
-    //     title: JSON.parse(domContent).title,
-    //     h1: JSON.parse(domContent).h1,
-    //     body: JSON.parse(domContent).body,
-    // };
-
-}
-
-startNavigation.onclick.addListener(function(element) {
-
-    chrome.tabs.sendMessage(tab.id, {text: 'report_back'}, sendtoAI)
-
 })
+

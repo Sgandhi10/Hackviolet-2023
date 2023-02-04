@@ -1,13 +1,52 @@
 'use strict'
 
 
+startNavigation.onclick = function(element) {
+    console.log("startNavigation clicked")
+
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+		
+			// navigate to next url
+		sendtoAI( tabs[0].url);
+    })
+}
 
 
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
-    if(msg.text == "report back"){
+async function sendtoAI(taburl) {
+   
+    console.log("sendtoAI called")
+    let page_title = document.title, page_h1_tag = '';
 
-        sendResponse(document[0].outerHTML);
-    }
-})
+if(document.querySelector("h1") !== null)
+	page_h1_tag = document.querySelector("h1").textContent;
+
+// prepare JSON data with page title & first h1 tag
+ let data = JSON.stringify({ title: page_title, h1: page_h1_tag });
+
+// // send message back to popup script
+let json_data = {
+    title: JSON.parse(data).title,
+    h1: JSON.parse(data).h1,
+    url: taburl
+};
+
+let blob = new Blob([JSON.stringify(json_data)], {type: "application/json;charset=utf-8"});
+let objectURL = URL.createObjectURL(blob);
+chrome.downloads.download({ url: objectURL, filename: ('content/test/data.json'), conflictAction: 'overwrite' });
+console.log("json downloaded")
+    
+ 
+
+
+}
+
+
+			// wait for 5 seconds
+		
+		
+
+
+
+
 
