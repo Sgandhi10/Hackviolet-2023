@@ -1,19 +1,22 @@
 <html>
+  <head>
   <style>
     button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-        border: none;
-        background-color: orange;
-        border: 2px solid #000000;
+      height: 30px;
+      width: 30px;
+      outline: none;
+      border: none;
+      background-color: orange;
+      border: 2px solid #000000;
     }
-    </style>
+  </style>
+  </head>
   <body>
     <h1>Hello Extensions</h1>
-    
 
     <button id="startNavigation"></button>
-<script src="popup.js"></script>
+    <script src="popup.js">
+      console.log("function called")
+    </script>
   </body>
 </html>
