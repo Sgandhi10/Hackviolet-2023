@@ -86,6 +86,5 @@ def webscraper():
     url = input_json['url']
     
     
-
 if __name__ == '__main__':
     app.run()
