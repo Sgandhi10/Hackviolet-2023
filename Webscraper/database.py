@@ -54,8 +54,10 @@ print('Missing: ', len(missing), missing)
 
 # Flask portion of the code
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/committees', methods=['GET'])
 def getCommittees():
@@ -85,6 +87,7 @@ def webscraper():
     input_json = request.get_json()
     url = input_json['url']
     print(url)
+    return jsonify({url: True})
     
 if __name__ == '__main__':
     app.run()

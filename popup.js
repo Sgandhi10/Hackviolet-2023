@@ -5,8 +5,9 @@ startNavigation.onclick = function(element) {
     console.log("startNavigation clicked")
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+
 		
-        fetch("http://127.0.0.1:5000", {
+        fetch("http://127.0.0.1:5000/webscraper", {
             method: "POST",
             body: JSON.stringify({
               url : tabs[0].url
