@@ -24,12 +24,14 @@ delegates = set(df['Chair']) | set(df['Ranking Member'])
 
 
 # import file with emails for representatives
-contactInfo = list(open('emails.txt').read().splitlines())
+contactInfo = list(open('Webscraper/emails.txt', encoding="utf8").read().splitlines())
 repEmails = {}
 index = 0
-while index < len(contactInfo):
-    if contactInfo[index].startswith('Rep.'| 'Sen.'):
-        name = contactInfo[index].split()
+# while index < len(contactInfo):
+#     if contactInfo[index].startswith('Rep.'| 'Sen.'):
+#         name = contactInfo[index].split('Rep.' | 'Sen.')
+#         print(name)
+    # break
 
 
 # add emails to the representatives in df
