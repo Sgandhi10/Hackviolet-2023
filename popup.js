@@ -6,8 +6,16 @@ startNavigation.onclick = function(element) {
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
 		
-			// navigate to next url
-		sendtoAI( tabs[0].url);
+        fetch("http://127.0.0.1:5000", {
+            method: "POST",
+            body: JSON.stringify({
+              url : tabs[0].url
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            }
+          });
+		//sendtoAI( tabs[0].url);
     })
 }
 
@@ -34,7 +42,7 @@ let json_data = {
 let blob = new Blob([JSON.stringify(json_data)], {type: "application/json;charset=utf-8"});
 let objectURL = URL.createObjectURL(blob);
 chrome.downloads.download({ url: objectURL, filename: ('content/test/data.json'), conflictAction: 'overwrite' });
-console.log("json downloaded")
+console.log("json")
     
  
 
