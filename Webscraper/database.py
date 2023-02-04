@@ -1,24 +1,35 @@
 import pandas as pd
 import sqlite3
+import re
 
 # import the representatives with there appropriate party, and subcomittee
 df = pd.read_csv('Webscraper\database.csv')
 print('Dataframe created')
 df = df.replace('TBD', '', regex=True)
+
+df['Chair Party'] = df['Chair'].str.extract(r'\((.*?)-*\)')
+df['Ranking Member Party'] = df['Ranking Member'].str.extract(r'\((.*?)-*\)')
+df['Chair'] = df['Chair'].str.extract(r'(.*)\(')
+df['Ranking Member'] = df['Ranking Member'].str.extract(r'(.*)\(')
+
+
 print(df.head())
 
 committes = set(df['Committee'])
 print(committes)
 
 delegates = set(df['Chair']) | set(df['Ranking Member'])
-print(delegates)
+# print(delegates)
+
+
 
 # import file with emails for representatives
-# emails_file = open("emails.txt", "rb").read().decode(encoding='utf-8', errors='ignore')
-# repEmails = {}
-# for line in emails_file.splitlines():
-#     if line.startswith('Sen.' | 'Rep.'):
-#         name = line.match()
+contactInfo = list(open('emails.txt').read().splitlines())
+repEmails = {}
+index = 0
+while index < len(contactInfo):
+    if contactInfo[index].startswith('Rep.'| 'Sen.'):
+        name = contactInfo[index].split()
 
 
 # add emails to the representatives in df
