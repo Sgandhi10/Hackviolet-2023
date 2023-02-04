@@ -1,22 +1,13 @@
 'use strict'
 
 
-startNavigation.onclick = function(element) {
-
-    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-        let url = tabs[0].url;
-        // use `url` here inside the callback because it's asynchronous!
-    })
-    //var currentURL = getCurrentTab()
-   // console.log(currentURL)
-    
-}
 
 
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
-async function getCurrentTab() {
-    let queryOptions = { active: true, lastFocusedWindow: true };
-    // `tab` will either be a `tabs.Tab` instance or `undefined`.
-    let [tab] = await chrome.tabs.query(queryOptions);
-    return tab;
-  }
+    if(msg.text == "report back"){
+
+        sendResponse(document[0].outerHTML);
+    }
+})
+
