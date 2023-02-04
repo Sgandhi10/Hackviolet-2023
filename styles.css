@@ -1,0 +1,62 @@
+body {
+    font: 14px "Century Gothic";
+    background-color:#121212;
+    color:white;
+    margin:0;
+    width:
+    300px;
+    height:400px
+}
+
+#heading {
+    height:50px;
+    background-color: rgba(255, 255, 255, 0.058);
+    color: #ffffff   
+}
+
+#bottom {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.058);
+}
+
+.tags {
+    padding:15px;
+}
+
+.contact_list {
+    padding:15px;
+}
+
+.scroll_window {
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.058);
+    border-radius: 10px;
+    height:200px;
+    border:none;
+    overflow:scroll;
+    overflow-x:hidden
+}
+
+::-webkit-scrollbar{
+    width:12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track{
+    border: 1px solid #44409e;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #44409e;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #44409e;
+}
+
+::-webkit-scrollbar-corner{
+    width:0px;
+    height:0px;
+}
