@@ -1,8 +1,8 @@
 import pandas as pd
-import sqlite3
 import re
+# import beautifulsoup4 as bs4
 
-# import the representatives with there appropriate party, and subcomittee
+# import the representatives with there appropriate party, and subcommittee
 df = pd.read_csv('Webscraper\database.csv')
 print('Dataframe created')
 df = df.replace('TBD', '', regex=True)
@@ -14,12 +14,18 @@ df['Ranking Member'] = df['Ranking Member'].str.extract(r'(.*)\(')
 df['Chair'] = df['Chair'].str.replace(u'\xa0', '')
 df['Ranking Member'] = df['Ranking Member'].str.replace(u'\xa0', '')
 
-committes = set(df['Committee'])
+committes = list(df['Committee'].unique())
 # print(committes)
 
 delegates = set(df['Chair']) | set(df['Ranking Member'])
 # print(delegates)
 
+subcommittees = {}
+for ind, row in df.iterrows():
+    if row['Committee'] not in subcommittees.keys():
+        subcommittees[row['Committee']] = set()
+    subcommittees[row['Committee']].add(row['Subcommittee'])
+print(subcommittees)
 
 
 # import file with emails for representatives
@@ -46,13 +52,39 @@ while index < len(contactInfo):
 missing = delegates - repInfo.keys()
 print('Missing: ', len(missing), missing)
 
+# Flask portion of the code
+from flask import Flask, jsonify, request
 
-# add emails to the representatives in df
+app = Flask(__name__)
 
+@app.route('/committees', methods=['GET'])
+def getCommittees():
+    data = {
+        'committees': committes
+    }
+    return jsonify(data)
 
+@app.route('/subcommittees', methods=['POST'])
+def getSubCommittees():
+    input_json = request.get_json()
+    committee = input_json['committee']
+    return jsonify(subcommittees[committee])
 
-df.to_csv('Webscraper\database-updated.csv', index=False)
+@app.route('/delegates', methods=['POST'])
+def getDelegates():
+    input_json = request.get_json()
+    committe = input_json['committee']
+    subcommittee = input_json['subcommittee']
+    outputList = [('Billy Bob', '928-388-2838', 'someboday@gmail.com', '@someboday', 'R'), 
+                  ('Billy Bob2', '927-388-2838', 'somebody@gmail.com', '@soeboday', 'D')]
+    # tmp = df[(df['Committee'] == committe) & (df['Subcommittee'] == subcommittee)]
+    return jsonify(outputList)
 
-df.to_sql('data', sqlite3.connect('data.db'), if_exists='replace')
-print('Database created')
-
+@app.route('/webscraper', methods=['POST'])
+def webscraper():
+    input_json = request.get_json()
+    url = input_json['url']
+    print(url)
+    
+if __name__ == '__main__':
+    app.run()
