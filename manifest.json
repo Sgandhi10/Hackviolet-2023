@@ -7,5 +7,13 @@
   "action": {
     "default_popup": "hello.html",
     "default_icon": "hello_extensions.png"
-  }
+  },
+  "background.service_worker": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [{
+    "matches": ["*://*/*"],
+    "js": ["popup.js"]
+  }]
 }
