@@ -1,8 +1,8 @@
 import pandas as pd
 import re
-import beautifulsoup4 as bs4
+# import beautifulsoup4 as bs4
 
-# import the representatives with there appropriate party, and subcomittee
+# import the representatives with there appropriate party, and subcommittee
 df = pd.read_csv('Webscraper\database.csv')
 print('Dataframe created')
 df = df.replace('TBD', '', regex=True)
@@ -84,7 +84,7 @@ def getDelegates():
 def webscraper():
     input_json = request.get_json()
     url = input_json['url']
-    
+    print(url)
     
 if __name__ == '__main__':
     app.run()
