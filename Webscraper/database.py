@@ -141,6 +141,7 @@ def webscraper():
     committee_list = committee.split(';')
     subcommittees = []
     for group in committee_list:
+        print(group)
         subcommittees += subcommittees[group]
 
     # then open ai will rank the sub committeees, and output an ordered list of sub committees
