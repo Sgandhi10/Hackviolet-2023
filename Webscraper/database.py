@@ -7,6 +7,10 @@ import re
 import os
 import openai
 from dotenv import load_dotenv
+from difflib import SequenceMatcher
+
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
 
 # import the representatives with there appropriate party, and subcommittee
 df = pd.read_csv('database.csv')
@@ -21,6 +25,7 @@ df['Chair'] = df['Chair'].str.replace(u'\xa0', '')
 df['Ranking Member'] = df['Ranking Member'].str.replace(u'\xa0', '')
 df['Subcommittee'] = df['Subcommittee'].fillna(0)
 df['Subcommittee'] = df['Subcommittee'].str.replace(u',', '')
+df = df.astype(str)
 
 committees = list(df['Committee'].unique())
 
@@ -69,36 +74,13 @@ missing = delegates - repInfo.keys()
 app = Flask(__name__)
 CORS(app)
 
-
+# Code for testing purposes
 @app.route('/committees', methods=['GET'])
 def getCommittees():
     data = {
         'committees': committees
     }
     return jsonify(data)
-
-
-# @app.route('/subcommittees', methods=['POST'])
-# def getSubCommittees():
-#     input_json = request.get_json()
-#     committee = input_json['committee']
-#     # print(committee)
-#     committee_list = committee.split(', ')
-#     output = []
-#     for group in committee_list:
-#         output += subcommittees[group]
-#     # print(output)
-#     return jsonify(output)
-
-
-# @app.route('/delegates', methods=['POST'])
-# def getDelegates():
-#     input_json = request.get_json()
-#     committee = input_json['committee']
-#     subcommittee = input_json['subcommittee']
-#     outputList = [('Billy Bob', '928-388-2838', 'someboday@gmail.com', '@someboday', 'R'),
-#                   ('Billy Bob2', '927-388-2838', 'somebody@gmail.com', '@soeboday', 'D')]
-#     return jsonify(outputList)
 
 
 @app.route('/webscraper', methods=['POST'])
@@ -131,7 +113,7 @@ def webscraper():
     openai.api_key = os.getenv('OPENAI_API_KEY')
     openai.Model.list()
     prompt = "Given these political committees: " + \
-        "; ".join(committees) + ". Tell me which 3 committees are most relevant to the following text separated by semi-colons (i.e. x,y,z): \n" + title + "\n" + paragraph
+        "; ".join(committees) + ". Tell me which 3 committees are most relevant to the following text separated by semi-colons (i.e. x;y;z): \n" + title + "\n" + paragraph
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt,
@@ -143,7 +125,7 @@ def webscraper():
     print(committee)
 
     # from there, we will pass these committees into a method that gives sub committees for every committee
-    committee_list = committee.split('; ')
+    committee_list = committee.split(';')
     subcommittees_list = []
     for group in committee_list:
         print(group)
@@ -155,7 +137,7 @@ def webscraper():
             print("Error:", group.strip().replace("'",""), "not in Committees")
     print(subcommittees_list)
     # then open ai will rank the sub committeees, and output an ordered list of sub committees
-    prompt2 = "Given these political committees: " + "; ".join(str(subcommittees_list)) + " Rank the committees based on how relevant they are to the following text in a python-styled list separated by commas like so x,y,z: " + paragraph
+    prompt2 = "Given these political subcommittees: [" + "; ".join(str(subcommittees_list)) + "] Order the subcommittees based on how relevant to the following text separated by semi-colons (i.e. x;y;z): \n" + paragraph
     response2 = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt2,
@@ -164,20 +146,22 @@ def webscraper():
 
     # ranked_subcommittees = response['choices'][0]['text']
     # then we will go in and find every single delegate for every single committees
-    output = response2['choices'][0]['text'].split(", ")
+    print("On to the next part")
+    output = re.split(",|;", response2['choices'][0]['text'])
     outputList = []
+    # print(df['Subcommittee'].to_string(index=False))
     for i in output:
-        try:
-            print(i.strip().replace("'", "").lower())
-            
-            name1 = df.loc[df['Subcommittee'].str.lower() == i.strip().replace("'", "").lower()]['Chair'].values[0]
-            name2 = df.loc[df['Subcommittee'].str.lower() == i.strip().replace("'", "").lower()]['Ranking Member'].values[0]
+        i = i.strip()
+        print(i)
+        try: 
+            name1 = df.loc[df['Subcommittee'] == str(i)]['Chair'].values[0]
+            name2 = df.loc[df['Subcommittee'] == str(i)]['Ranking Member'].values[0]
             if name1 in repInfo.keys():
                 outputList.append((name1, repInfo[name1][1], repInfo[name1][2]))
             if name2 in repInfo.keys():
                 outputList.append((name2, repInfo[name2][1], repInfo[name2][2]))
         except:
-            print("Error: ", i, " not in subcommittees")
+            print("Error:", i, "not in subcommittees")
     # outputList = [('Billy Bob', 'someboday@gmail.com', '@someboday'),
                 #   ('Billy Bob2', 'somebody@gmail.com', '@soeboday')]
 
