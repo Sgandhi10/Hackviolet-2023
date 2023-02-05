@@ -1,7 +1,7 @@
 'use strict'
 
 
-startNavigation.onclick = function (element) {
+start_navigation.onclick = function (element) {
   console.log("startNavigation clicked")
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
