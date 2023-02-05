@@ -133,7 +133,6 @@ def webscraper():
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt,
-        max_tokens=2048,
         temperature=0.6
     )
     print("; ".join(committees))
@@ -156,7 +155,6 @@ def webscraper():
     response2 = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt2,
-        max_tokens=2048,
         temperature=0.6
     )
 
