@@ -1,11 +1,12 @@
 import urllib.request
 from bs4 import BeautifulSoup as bs
-import requests
 from flask_cors import CORS
 from flask import Flask, jsonify, request
 import pandas as pd
 import re
-# import beautifulsoup4 as bs4
+import os
+import openai
+from dotenv import load_dotenv
 
 # import the representatives with there appropriate party, and subcommittee
 df = pd.read_csv('Webserver/database.csv')
@@ -20,8 +21,7 @@ df['Chair'] = df['Chair'].str.replace(u'\xa0', '')
 df['Ranking Member'] = df['Ranking Member'].str.replace(u'\xa0', '')
 df['Subcommittee'] = df['Subcommittee'].fillna(0)
 
-committes = list(df['Committee'].unique())
-print(committes)
+committees = list(df['Committee'].unique())
 
 delegates = set(df['Chair']) | set(df['Ranking Member'])
 # print(delegates)
@@ -67,12 +67,12 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/committees', methods=['GET'])
-def getCommittees():
-    data = {
-        'committees': committes
-    }
-    return jsonify(data)
+# @app.route('/committees', methods=['GET'])
+# def getCommittees():
+#     data = {
+#         'committees': committes
+#     }
+#     return jsonify(data)
 
 
 @app.route('/subcommittees', methods=['POST'])
@@ -83,7 +83,7 @@ def getSubCommittees():
     committee_list = committee.split(', ')
     output = []
     for group in committee_list:
-        output.append(subcommittees[group])
+        output += subcommittees[group]
     print(output)
     return jsonify(output)
 
@@ -91,7 +91,7 @@ def getSubCommittees():
 @app.route('/delegates', methods=['POST'])
 def getDelegates():
     input_json = request.get_json()
-    committe = input_json['committee']
+    committee = input_json['committee']
     subcommittee = input_json['subcommittee']
     outputList = [('Billy Bob', '928-388-2838', 'someboday@gmail.com', '@someboday', 'R'),
                   ('Billy Bob2', '927-388-2838', 'somebody@gmail.com', '@soeboday', 'D')]
@@ -113,31 +113,51 @@ def webscraper():
 
     htmlParse = bs(html, 'html.parser')
 
-    s = ""
+    paragraph = ""
     for para in htmlParse.find_all("p"):
-        s += para.get_text()
-    s = s[:1000]
+        paragraph += para.get_text()
+    paragraph = paragraph[:1000]
 
-    t = ""
+    title = ""
     for para in htmlParse.find_all("title"):
-        t += para.get_text()
+        title += para.get_text()
 
     # pass these two strings into an open ai method
-    # open ai is going to pass back a list of committees
-    # This is from Rakesh
+    # open ai is going to pass back a list of committees that are most relevant to the text
+    load_dotenv()
+    openai.api_key = os.getenv('OPENAI_API_KEY')
+    openai.Model.list()
+    prompt = "Given these political committees: " + \
+        ";".join(committees) + ". Tell me which 3 committees are most relevant to the following text separated by semi-colons (i.e. x,y,z): \n" + title + "\n" + paragraph
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        temperature=0
+    )
+    # list of committees returned by openai
+    committee = response['choices'][0]['text']
 
-    committee_list = committee.split(',')
-    output = []
-    for group in committee_list:
-        output.append(subcommittees[group])
-    print(output)
-    return jsonify(output)
     # from there, we will pass these committees into a method that gives sub committees for every committee
-    # This is from Rakesh
+    committee_list = committee.split(';')
+    subcommittees = []
+    for group in committee_list:
+        subcommittees += subcommittees[group]
+
     # then open ai will rank the sub committeees, and output an ordered list of sub committees
+    prompt2 = "Given these political committees: " + \
+        ";".join(subcommittees) + "Rank the committees based on how relevant they are to the following text in a python-styled list like so x,y,z:" + paragraph
+    response2 = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt2,
+        temperature=0
+    )
+    # ranked_subcommittees = response['choices'][0]['text']
     # then we will go in and find every single delegate for every single committees
 
-    return jsonify({url: url, 'body': s})
+    outputList = [('Billy Bob', 'someboday@gmail.com', '@someboday'),
+                  ('Billy Bob2', 'somebody@gmail.com', '@soeboday')]
+
+    return jsonify({"delegates": outputList})
 
 
 if __name__ == '__main__':

@@ -1,5 +1,27 @@
-let list = [["Bill", "bill123@gmail.com", "haha"], ["Harley", "sshihhung21@vt.edu", "haha"], ["Jayson", "jaysond21@vt.edu", "haha"], ["Joe", "joemama@aol.com", "haha"], ["Clinton", "clinton2@gmail.com", "haha"]];
+//let list = [["Bill", "bill123@gmail.com", "haha"], ["Harley", "sshihhung21@vt.edu", "haha"], ["Jayson", "jaysond21@vt.edu", "haha"], ["Joe", "joemama@aol.com", "haha"], ["Clinton", "clinton2@gmail.com", "haha"]];
 
+
+start_navigation.onclick = function (element) {
+    console.log("startNavigation clicked")
+  
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+  
+          
+          const delegateList = fetch("http://127.0.0.1:5000/webscraper", {
+              method: "POST",
+              body: JSON.stringify({
+                url : tabs[0].url
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8"
+              }
+            });
+
+            let list = delegateList
+            renderContacts()
+          
+      })
+  }
 
 function renderContacts() {
     // Get a list of names
