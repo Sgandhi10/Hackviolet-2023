@@ -60,6 +60,11 @@ Phone: 202–225–5765
 Email: Rep.Donyoung@opencongress.org
 Twitter: @RepDonYoung
 
+Rep. Young Kim
+Phone: 202-225-4111
+Email: Rep.Youngkim@opencongress.org
+Twitter: @RepYoungKim
+
 ARIZONA
 Sen. John McCain
 Phone: 202–224–2235
@@ -75,6 +80,22 @@ Rep. Ruben Gallego
 Phone: 202–225–4065
 Email: Rep.Rubengallego@opencongress.org
 Twitter: @RepRubenGallego
+
+Rep. Mike Braun
+Email: press@braun.senate.gov
+Twitter: @SenatorBraun
+
+Rep. Katie Porter
+Phone: 202-225-5611
+Email: Rep.Katieporter@opencongress.org
+Twitter: @RepKatiePorter
+
+Rep. Burgess Owens
+Phone: 202-225-3011
+Email: Rep.Burgessowens@opencongress.org
+Twitter: @RepBurgessOwens
+
+
 
 Rep. Martha McSally
 Phone: 202–225–2542
@@ -270,7 +291,7 @@ Twitter: @MaxineWaters
 
 Rep. Mike Thompson
 Phone: 202–225–3311
-Email: Rep.Mikethompson@opencongress.org
+Email: Rep.Thompson@opencongress.org
 Twitter: @RepThompson
 
 Rep. Linda Sánchez
@@ -1665,7 +1686,7 @@ Phone: 202–225–2601
 Email: Rep.Meng@opencongress.org
 Twitter: @RepGraceMeng
 
-Rep. Nydia Velázquez
+Rep. Nydia Velazquez
 Phone: 202–225–2361
 Email: Rep.Velazquez@opencongress.org
 Twitter: @NydiaVelazquez

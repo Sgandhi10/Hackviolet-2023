@@ -1,40 +1,70 @@
 body {
-    font: 14px "Century Gothic";
+    display: flex;
+    flex-direction: column;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: 14px;
     background-color:#121212;
     color:white;
     margin:0;
     width:
     300px;
-    height:400px
+    height:400px;
+    overflow: visible;
 }
 
 #heading {
     height:50px;
-    background-color: rgba(255, 255, 255, 0.058);
+    /* background-color: rgba(255, 255, 255, 0.058);*/
     color: #ffffff   
 }
 
 #bottom {
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.058);
+    display: flex;
+    justify-content: flex-end;
+    gap: 60px;
+    padding: 5px;
+    /* background-color: rgba(255, 255, 255, 0.058);*/
 }
 
 .tags {
     padding:15px;
 }
 
-.contact_list {
-    padding:15px;
+#count_disp {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+    padding: 5px;
+    align-self: flex-end;
+    width:50px;
+    height:30px;
 }
 
-.scroll_window {
+#count {
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+#people {
+    padding: 0;
+}
+
+#contact_list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: visible;
+}
+
+#scroll_window {
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.058);
     border-radius: 10px;
-    height:200px;
+    height:275px;
     border:none;
-    overflow:scroll;
-    overflow-x:hidden
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
 
 ::-webkit-scrollbar{
@@ -59,4 +89,55 @@ body {
 ::-webkit-scrollbar-corner{
     width:0px;
     height:0px;
+}
+
+#start_navigation{
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    align-self: center;
+    background-color: #44409e;
+    color: white;
+    height: 40px;
+    width: 100px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+#settings{
+    width:40px;
+    height:40px;
+    background-color: transparent;
+    border: none;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.icon {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+}
+
+.icon .tooltiptext {
+    visibility: hidden;
+    top: -10px;
+    right: 105%;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding:5px 0;
+    border-radius: 6px;
+    font-size: 15px;
+    padding: 5px;
+
+    position: absolute;
+    overflow: visible;
+    z-index: 10;
+}
+
+.icon:hover .tooltiptext {
+    visibility: visible;
 }
