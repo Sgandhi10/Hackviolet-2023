@@ -2752,3 +2752,27 @@ Twitter: @CynthiaLummis
 Rep. Sharice Davids
 Email: Rep.Davids@opencongress.org
 Twitter: @RepDavids
+
+Rep. Abigail Spanberger
+Email: Rep.Spanberger@opencongress.org
+Twitter: @RepSpanberger
+
+Rep. Mark Green
+Email: Rep.Green@opencongress.org
+Twitter: @RepMarkGreen
+
+Rep. Raja Krishnamoorthi
+Email: Rep.Krishnamoorthi@opencongress.org
+Twitter: @CongressmanRaja
+
+Sen. Roger Marshall
+Email: Sen.Marshall@opencongress.org
+Twitter: @RogerMarshallMD
+
+Rep. Blake Moore
+Email: Rep.Moore@opencongress.org
+Twitter: RepBlakeMoore
+
+Sen. Bob Menendez
+Email: Sen.Menendez@opencongress.org
+Twitter: @SenatorMenendez
