@@ -3,7 +3,7 @@ import re
 # import beautifulsoup4 as bs4
 
 # import the representatives with there appropriate party, and subcommittee
-df = pd.read_csv('Webscraper\database.csv')
+df = pd.read_csv('Webscraper/database.csv')
 print('Dataframe created')
 df = df.replace('TBD', '', regex=True)
 
