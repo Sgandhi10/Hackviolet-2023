@@ -5,7 +5,7 @@
   "version": "1.0",
   "permissions": ["declarativeContent", "activeTab", "tabs", "downloads"],
 	"background.service_worker": {
-    	"scripts": ["background.js"],
+    	"scripts": ["background.js","render.js"], 
       	"persistent": false
     },
   "action": {

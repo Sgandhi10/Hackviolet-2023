@@ -136,4 +136,4 @@ $('#mode').on({
 
 const someInput = document.querySelector('icon');
 
-document.getElementById("start_navigation").onclick = renderContacts;
+// document.getElementById("start_navigation").onclick = renderContacts;
