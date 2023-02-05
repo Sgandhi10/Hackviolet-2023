@@ -67,12 +67,12 @@ app = Flask(__name__)
 CORS(app)
 
 
-# @app.route('/committees', methods=['GET'])
-# def getCommittees():
-#     data = {
-#         'committees': committes
-#     }
-#     return jsonify(data)
+@app.route('/committees', methods=['GET'])
+def getCommittees():
+    data = {
+        'committees': committees
+    }
+    return jsonify(data)
 
 
 @app.route('/subcommittees', methods=['POST'])
@@ -128,25 +128,30 @@ def webscraper():
     openai.api_key = os.getenv('OPENAI_API_KEY')
     openai.Model.list()
     prompt = "Given these political committees: " + \
-        ";".join(committees) + ". Tell me which 3 committees are most relevant to the following text separated by semi-colons (i.e. x,y,z): \n" + title + "\n" + paragraph
+        "; ".join(committees) + ". Tell me which 3 committees are most relevant to the following text separated by semi-colons (i.e. x,y,z): \n" + title + "\n" + paragraph
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt,
         temperature=0
     )
+    print("; ".join(committees))
     # list of committees returned by openai
     committee = response['choices'][0]['text']
+    print(committee)
 
     # from there, we will pass these committees into a method that gives sub committees for every committee
     committee_list = committee.split(';')
-    subcommittees = []
+    subcommittees_list = []
     for group in committee_list:
         print(group)
-        subcommittees += subcommittees[group]
+        try:
+            subcommittees_list += subcommittees[group.strip()]
+        except:
+            print("Error: ", group, " not in subcommittees")
 
     # then open ai will rank the sub committeees, and output an ordered list of sub committees
     prompt2 = "Given these political committees: " + \
-        ";".join(subcommittees) + "Rank the committees based on how relevant they are to the following text in a python-styled list like so x,y,z:" + paragraph
+        "; ".join(subcommittees_list) + "Rank the committees based on how relevant they are to the following text in a python-styled list like so x,y,z:" + paragraph
     response2 = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt2,
@@ -154,11 +159,11 @@ def webscraper():
     )
     # ranked_subcommittees = response['choices'][0]['text']
     # then we will go in and find every single delegate for every single committees
-
+    response2['choices'][0]['text'] = response2['choices'][0]['text']
     outputList = [('Billy Bob', 'someboday@gmail.com', '@someboday'),
                   ('Billy Bob2', 'somebody@gmail.com', '@soeboday')]
 
-    return jsonify({"delegates": outputList})
+    return jsonify({"delegates": outputList}),200
 
 
 if __name__ == '__main__':
