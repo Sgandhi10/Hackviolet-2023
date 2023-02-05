@@ -55,6 +55,9 @@ print('Missing: ', len(missing), missing)
 # Flask portion of the code
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from bs4 import BeautifulSoup as bs 
+import requests
+
 
 app = Flask(__name__)
 CORS(app)
@@ -87,7 +90,20 @@ def webscraper():
     input_json = request.get_json()
     url = input_json['url']
     print(url)
-    return jsonify({url: True})
+    # load the projectpro webpage content 
+
+    r = requests.get(url) 
+# convert to beautiful soup 
+    soup = bs(r.content) 
+# printing our web page 
+    title_tag = soup.find_all('title')
+    # body_tag = str(soup.find_all('article'))
+    # body_tag = body_tag.split()[:100]
+    return jsonify({url: url , 'title': title_tag})
     
 if __name__ == '__main__':
     app.run()
+    
+
+    
+
