@@ -9,7 +9,7 @@ import openai
 from dotenv import load_dotenv
 
 # import the representatives with there appropriate party, and subcommittee
-df = pd.read_csv('Webserver/database.csv')
+df = pd.read_csv('database.csv')
 print('Dataframe created')
 df = df.replace('TBD', '', regex=True)
 
@@ -36,7 +36,7 @@ print(subcommittees)
 
 
 # import file with emails for representatives
-contactInfo = list(open('Webserver/emails.txt',
+contactInfo = list(open('emails.txt',
                    encoding="utf8").read().splitlines())
 repInfo = {}
 index = 0
