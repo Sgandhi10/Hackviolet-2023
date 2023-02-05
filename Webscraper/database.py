@@ -1,3 +1,7 @@
+from bs4 import BeautifulSoup as bs
+import requests
+from flask_cors import CORS
+from flask import Flask, jsonify, request
 import pandas as pd
 import re
 # import beautifulsoup4 as bs4
@@ -13,6 +17,7 @@ df['Chair'] = df['Chair'].str.extract(r'(.*)\(')
 df['Ranking Member'] = df['Ranking Member'].str.extract(r'(.*)\(')
 df['Chair'] = df['Chair'].str.replace(u'\xa0', '')
 df['Ranking Member'] = df['Ranking Member'].str.replace(u'\xa0', '')
+df['Subcommittee'] = df['Subcommittee'].fillna(0)
 
 committes = list(df['Committee'].unique())
 # print(committes)
@@ -24,12 +29,14 @@ subcommittees = {}
 for ind, row in df.iterrows():
     if row['Committee'] not in subcommittees.keys():
         subcommittees[row['Committee']] = set()
-    subcommittees[row['Committee']].add(row['Subcommittee'])
+    if row['Subcommittee'] != 0:
+        subcommittees[row['Committee']].add(row['Subcommittee'])
 print(subcommittees)
 
 
 # import file with emails for representatives
-contactInfo = list(open('Webscraper/emails.txt', encoding="utf8").read().splitlines())
+contactInfo = list(open('Webscraper/emails.txt',
+                   encoding="utf8").read().splitlines())
 repInfo = {}
 index = 0
 while index < len(contactInfo):
@@ -64,6 +71,7 @@ import urllib.request
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/committees', methods=['GET'])
 def getCommittees():
     data = {
@@ -71,21 +79,28 @@ def getCommittees():
     }
     return jsonify(data)
 
+
 @app.route('/subcommittees', methods=['POST'])
 def getSubCommittees():
     input_json = request.get_json()
     committee = input_json['committee']
-    return jsonify(subcommittees[committee])
+    print(committee)
+    committee_list = committee.split(', ')
+    output = []
+    for group in committee_list:
+        output.append(subcommittees[group])
+    print(output)
+    return jsonify(output)
 
 @app.route('/delegates', methods=['POST'])
 def getDelegates():
     input_json = request.get_json()
     committe = input_json['committee']
     subcommittee = input_json['subcommittee']
-    outputList = [('Billy Bob', '928-388-2838', 'someboday@gmail.com', '@someboday', 'R'), 
+    outputList = [('Billy Bob', '928-388-2838', 'someboday@gmail.com', '@someboday', 'R'),
                   ('Billy Bob2', '927-388-2838', 'somebody@gmail.com', '@soeboday', 'D')]
-    # tmp = df[(df['Committee'] == committe) & (df['Subcommittee'] == subcommittee)]
     return jsonify(outputList)
+
 
 @app.route('/webscraper', methods=['POST'])
 def webscraper():
@@ -111,5 +126,3 @@ if __name__ == '__main__':
 
     
 
-
-    
