@@ -1,4 +1,4 @@
-let list = [["Bill", "bill123@gmail.com", "haha"], ["Harley", "sshihhung21@vt.edu", "haha"], ["Jayson", "jaysond21@vt.edu", "haha"], ["Joe", "joemama@aol.com", "haha"], ["Clinton", "clinton2@gmail.com", "haha"]];
+let dark = true;
 
 
 function renderContacts() {
@@ -17,7 +17,8 @@ function renderContacts() {
         let el = document.createElement("div");
         el.style.alignSelf="center";
         el.style.padding="5px";
-        el.style.fontSize="20px";
+        el.style.height="25px";
+        el.style.fontSize="15px";
         if (i % 2 == 0)
         {
             el.style.backgroundColor= "rgba(255, 255, 255, 0.100)";
@@ -47,10 +48,17 @@ function renderContacts() {
         email_tip.className="tooltiptext";
         email_tip.textContent=list[i][1];
         img2_div.appendChild(email_tip);
-        img2_div.addEventListener("click", function(el){
-            text = img2_div.lastChild.textContent;
-            navigator.clipboard.writeText(text);
-            img2_div.lastChild.textContent = "Copied!";
+        img2_div.addEventListener('click', function() {
+            original_text = img2_div.lastChild.textContent;
+            navigator.clipboard.writeText(original_text);
+            img2_div.lastChild.textContent="Copied!";
+            setTimeout(function(){
+                img2_div.lastChild.classList.add("fadeOut");
+                setTimeout(function(){
+                    img2_div.lastChild.classList.remove("fadeOut");
+                    img2_div.lastChild.textContent=original_text;
+                }, 3000)
+            }, 300);
         });
 
         // create twitter tooltip text and append to icon
@@ -58,12 +66,18 @@ function renderContacts() {
         twitter_tip.className="tooltiptext";
         twitter_tip.textContent=list[i][2];
         img1_div.appendChild(twitter_tip);
-        img1_div.addEventListener("click", function(el){
-            text = img1_div.lastChild.textContent;
-            navigator.clipboard.writeText(text);
-            img1_div.lastChild.textContent = "Copied!";
+        img1_div.addEventListener('click', function() {
+            original_text = img1_div.lastChild.textContent;
+            navigator.clipboard.writeText(original_text);
+            img1_div.lastChild.textContent="Copied!";
+            setTimeout(function(){
+                img1_div.lastChild.classList.add("fadeOut");
+                setTimeout(function(){
+                    img1_div.lastChild.classList.remove("fadeOut");
+                    img1_div.lastChild.textContent=original_text;
+                }, 3000)
+            }, 300);
         });
-
         
         el.textContent = list[i][0];
         el.appendChild(img2_div)
@@ -72,6 +86,28 @@ function renderContacts() {
     }
 }
 
+$('#mode').on({
+    'click':function() {
+        if (dark)
+        {
+            $(this).addClass("rotate");
+            dark = false;
+            $(this).attr('src', 'img/light.png');
+            document.body.style.backgroundColor = "#fcf8f8";
+            document.body.style.color = "#333333";
+            $("#scroll_window").css({backgroundColor: "#f3effe"});
+        }
+        else {
+            $(this).removeClass("rotate");
+            dark = true;
+            $(this).attr('src', 'img/night.png');
+            document.body.style.backgroundColor = "#121212";
+            document.body.style.color = "#f3effe";
+            $("#scroll_window").css({backgroundColor: "rgba(255, 255, 255, 0.058)"});
+        }
+    }
+})
+
 const someInput = document.querySelector('icon');
 
-document.getElementById("settings").onclick = renderContacts;
+document.getElementById("start_navigation").onclick = renderContacts;

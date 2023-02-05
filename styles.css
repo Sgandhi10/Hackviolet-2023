@@ -4,24 +4,25 @@ body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font: 14px;
     background-color:#121212;
-    color:white;
+    color:#f3effe;
     margin:0;
     width:
-    300px;
+    350px;
     height:400px;
     overflow: visible;
+    transition: background-color 0.5s ease;
+    transition: color 0.5s ease;
 }
 
 #heading {
     height:50px;
     /* background-color: rgba(255, 255, 255, 0.058);*/
-    color: #ffffff   
 }
 
 #bottom {
     display: flex;
     justify-content: flex-end;
-    gap: 60px;
+    gap: 90px;
     padding: 5px;
     /* background-color: rgba(255, 255, 255, 0.058);*/
 }
@@ -58,13 +59,13 @@ body {
 }
 
 #scroll_window {
-    padding: 5px;
     background-color: rgba(255, 255, 255, 0.058);
     border-radius: 10px;
     height:275px;
     border:none;
     overflow-y:scroll;
     overflow-x:hidden;
+    transition: background-color 0.5s ease;
 }
 
 ::-webkit-scrollbar{
@@ -95,19 +96,33 @@ body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     align-self: center;
     background-color: #44409e;
-    color: white;
+    color: #f3effe;
     height: 40px;
     width: 100px;
-    border: none;
     border-radius: 20px;
+    border: none;
     font-size: 20px;
 }
 
-#settings{
-    width:40px;
-    height:40px;
+#start_navigation:hover {
+    background-color: #8784e3; 
+    transition: 0.2s;
+    border: solid #44409e 2px;
+}
+
+#mode{
+    align-self: center;
+    width:30px;
+    height:30px;
     background-color: transparent;
     border: none;
+    transition: transform 0.5s ease-out;
+    transform: rotate(0deg);
+}
+
+#mode.rotate {
+    transform: rotate(180deg);
+    transition: transform 0.5s ease-out;
 }
 
 img {
@@ -126,7 +141,7 @@ img {
     top: -10px;
     right: 105%;
     background-color: black;
-    color: #fff;
+    color: #f3effe;
     text-align: center;
     padding:5px 0;
     border-radius: 6px;
@@ -140,4 +155,14 @@ img {
 
 .icon:hover .tooltiptext {
     visibility: visible;
+}
+
+.fadeOut {
+    animation: fadeOut 0.8s linear forwards;
+}
+
+@keyframes fadeOut {
+    0% {opacity:1;}
+    50% {opacity:0.5;}
+    100% {opacity:0;}
 }
