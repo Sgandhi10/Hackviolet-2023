@@ -159,9 +159,16 @@ def webscraper():
     )
     # ranked_subcommittees = response['choices'][0]['text']
     # then we will go in and find every single delegate for every single committees
-    response2['choices'][0]['text'] = response2['choices'][0]['text']
-    outputList = [('Billy Bob', 'someboday@gmail.com', '@someboday'),
-                  ('Billy Bob2', 'somebody@gmail.com', '@soeboday')]
+    output = response2['choices'][0]['text'].split(";")
+    print(output)
+    outputList = []
+    for i in output:
+        name1 = df.loc[df['Subcomittee'] == i]['Chair']
+        name2 = df.loc[df['Subcomittee'] == i]['Ranking Member']
+        outputList.append((name1, repInfo[name1][1], repInfo[name1][2]))
+        outputList.append((name2, repInfo[name2][1], repInfo[name2][2]))
+    # outputList = [('Billy Bob', 'someboday@gmail.com', '@someboday'),
+                #   ('Billy Bob2', 'somebody@gmail.com', '@soeboday')]
 
     return jsonify({"delegates": outputList}),200
 
