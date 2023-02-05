@@ -1,28 +1,54 @@
 let dark = true;
 
 
-function renderContacts() {
-    // Get a list of names
-    // for each tuple of
-    console.log("Function called");
-    let contact_list = document.getElementById("scroll_window");
-    contact_list.innerHTML = '';
+start_navigation.onclick = function (element) {
+  console.log("startNavigation clicked")
 
-    let count = document.getElementById("count");
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+
+
+    
+    fetch("http://127.0.0.1:5000/webscraper", {
+      method: "POST",
+      body: JSON.stringify({
+        url: tabs[0].url
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(async response => {
+        console.log(response)
+        tmp = await response.json()
+        renderContacts(tmp["delegates"])
+      })
+     
+
+  })
+}
+
+function renderContacts(list) {
+  // Get a list of names
+  // for each tuple of
+  console.log("Function called");
+  let contact_list = document.getElementById("scroll_window");
+  contact_list.innerHTML = '';
+
+  let count = document.getElementById("count");
     count.textContent=list.length;
 
 
-    for (i = 0; i < list.length; ++i)
-    {
-        let el = document.createElement("div");
-        el.style.alignSelf="center";
-        el.style.padding="5px";
-        el.style.height="25px";
-        el.style.fontSize="15px";
-        if (i % 2 == 0)
-        {
-            el.style.backgroundColor= "rgba(255, 255, 255, 0.100)";
-        }
+  for (i = 0; i < list.length; ++i)
+  {
+      let el = document.createElement("div");
+      el.style.alignSelf="center";
+      el.style.padding="5px";
+      el.style.height="25px";
+      el.style.fontSize="15px";
+      if (i % 2 == 0)
+      {
+          el.style.backgroundColor= "rgba(255, 255, 255, 0.100)";
+      }
 
         // create icon class and twitter icon
         let img1_div = document.createElement("div");
