@@ -60,11 +60,6 @@ Phone: 202–225–5765
 Email: Rep.Donyoung@opencongress.org
 Twitter: @RepDonYoung
 
-Rep. Young Kim
-Phone: 202-225-4111
-Email: Rep.Youngkim@opencongress.org
-Twitter: @RepYoungKim
-
 ARIZONA
 Sen. John McCain
 Phone: 202–224–2235
@@ -80,22 +75,6 @@ Rep. Ruben Gallego
 Phone: 202–225–4065
 Email: Rep.Rubengallego@opencongress.org
 Twitter: @RepRubenGallego
-
-Rep. Mike Braun
-Email: press@braun.senate.gov
-Twitter: @SenatorBraun
-
-Rep. Katie Porter
-Phone: 202-225-5611
-Email: Rep.Katieporter@opencongress.org
-Twitter: @RepKatiePorter
-
-Rep. Burgess Owens
-Phone: 202-225-3011
-Email: Rep.Burgessowens@opencongress.org
-Twitter: @RepBurgessOwens
-
-
 
 Rep. Martha McSally
 Phone: 202–225–2542
@@ -116,6 +95,11 @@ Rep. Matt Salmon
 Phone: 202–225–2635
 Email: Rep.Salmon@opencongress.org
 Twitter: @RepMattSalmon
+
+Rep. Matt Rosendale
+Phone: 202-225-3211
+Email: Rep.Rosendale@opencongress.org
+Twitter: RepRosendale
 
 Rep. David Schweikert
 Phone: 202–225–2190
@@ -189,6 +173,11 @@ Phone: 202–225–2506
 Email: Rep.Hill@opencongress.org
 Twitter: @RepFrenchHill
 
+Rep. Jahana Hayes
+Phone: 202-225-4476
+Email: Rep.Hayes@opencongress.org
+Twitter: @JahanaHayesCT
+
 Rep. Norma Torres
 Phone: 202–225–6161
 Email: Rep.Torres@opencongress.org
@@ -224,7 +213,7 @@ Phone: 202–225–8045
 Email: Rep.Vargas@opencongress.org
 Twitter: @RepJuanVargas
 
-Rep. Alan Lowenthal
+Rep. Alan Lowenthal(202) 225-3615
 Phone: 202–225–7924
 Email: Rep.Lowenthal@opencongress.org
 Twitter: @RepLowenthal
@@ -291,7 +280,7 @@ Twitter: @MaxineWaters
 
 Rep. Mike Thompson
 Phone: 202–225–3311
-Email: Rep.Thompson@opencongress.org
+Email: Rep.Mikethompson@opencongress.org
 Twitter: @RepThompson
 
 Rep. Linda Sánchez
@@ -1332,7 +1321,7 @@ Twitter: @alfranken
 Sen. Amy Klobuchar
 Phone: 202–224–3244
 Email: TK EMAIL ADDRESS
-Twitter: “@amyklobuchar”
+Twitter: “@amyklobuchar
 
 Rep. Timothy Walz
 Phone: 202–225–2472
@@ -1342,7 +1331,7 @@ Twitter: @RepTimWalz
 Rep. John Kline
 Phone: 202–225–2271
 Email: Rep.Kline@opencongress.org
-Twitter: “@repjohnkline”
+Twitter: “@repjohnkline
 
 Rep. Erik Paulsen
 Phone: 202–225–2871
@@ -1352,7 +1341,7 @@ Twitter: @RepErikPaulsen
 Rep. Betty McCollum
 Phone: 202–225–6631
 Email: Rep.Mccollum@opencongress.org
-Twitter: “@BettyMcCollum04”
+Twitter: “@BettyMcCollum04
 
 Rep. Keith Ellison
 Phone: 202–225–4755
@@ -1362,48 +1351,63 @@ Twitter: @keithellison
 Rep. Tom Emmer
 Phone: 202–225–2331
 Email: Rep.Emmer@opencongress.org
-Twitter: “@tomemmer”
+Twitter: “@tomemmer
 
 Rep. Collin Peterson
 Phone: 202–225–2165
 Email: Rep.Collinpeterson@opencongress.org
-Twitter: “@collinpeterson”
+Twitter: “@collinpeterson
 
 Rep. Rick Nolan
 Phone: 202–225–6211
 Email: Rep.Nolan@opencongress.org
-Twitter: “@USRepRickNolan”
+Twitter: “@USRepRickNolan
 
 MISSISSIPPI
 Sen. Thad Cochran
 Phone: 202–224–5054
 Email: Sen.Cochran@opencongress.org
-Twitter: “@SenThadCochran”
+Twitter: “@SenThadCochran
 
 Sen. Roger Wicker
 Phone: 202–224–6253
 Email: Sen.Wicker@opencongress.org
-Twitter: “@SenatorWicker”
+Twitter: “@SenatorWicker
 
 Rep. Trent Kelly
 Phone: 202–225–4306
 Email: Rep.Trentkelly@opencongress.org
-Twitter: “@KellyforMS01”
+Twitter: “@KellyforMS01
 
 Rep. Bennie G. Thompson
 Phone: 202–225–5876
 Email: Rep.Benniethompson@opencongress.org
-Twitter: “@HomelandDems”
+Twitter: “@HomelandDems
 
 Rep. Gregg Harper
 Phone: 202–225–5031
 Email: Rep.Harper@opencongress.org
-Twitter: “@GreggHarper”
+Twitter: “@GreggHarper
+
+Rep. Haley Stevens
+Phone: 734-853-3040
+Email: Rep.Stevens@opencongress.org
+Twitter: @RepHayleyStevens
 
 Rep. Steven Palazzo
 Phone: 202–225–5772
 Email: Rep.Palazzo@opencongress.org
-Twitter: “@CongPalazzo”
+Twitter: @CongPalazzo
+
+Sen. Margaret Hassan 
+Phone: 202-224-3324
+Email: Rep.Hassan@opencongress.org
+Twitter: @senatorHassan 
+
+Rep. Eleanor Holmes Norton
+Phone: 202-408-9041
+Email: Rep.HolmesNorton@opencongress.org
+Twitter: @eleanornorton
 
 MISSOURI
 Sen. Roy Blunt
@@ -1416,7 +1420,7 @@ Phone: 202–224–6154
 Email: Sen.Mccaskill@opencongress.org
 Twitter: @clairecmc
 
-Rep. William “Lacy” Clay Jr.
+Rep. William “Lacy Clay Jr.
 Phone: 202–225–2406
 Email: Rep.Lacyclay@opencongress.org
 Twitter: @LacyClayMO1
@@ -1636,6 +1640,11 @@ Phone: 202–225–6316
 Email: Rep.Lujangrisham@opencongress.org
 Twitter: @RepLujanGrisham
 
+Rep. Michelle Fischbach
+Phone: 202-225-2165
+Email: Rep.Fischbach@opencongress.org
+Twitter: @FischbachMN7
+
 Rep. Steve Pearce
 Phone: 202–225–2365
 Twitter: @RepStevePearce
@@ -1686,7 +1695,7 @@ Phone: 202–225–2601
 Email: Rep.Meng@opencongress.org
 Twitter: @RepGraceMeng
 
-Rep. Nydia Velazquez
+Rep. Nydia Velázquez
 Phone: 202–225–2361
 Email: Rep.Velazquez@opencongress.org
 Twitter: @NydiaVelazquez
@@ -2466,7 +2475,7 @@ Twitter: @RepBrianBabin
 
 Rep. Kay Granger
 Phone: 202–225–5071 Email: Rep.Granger@opencongress.org
-Twitter: @RepKayGranger”
+Twitter: @RepKayGranger
 
 UTAH
 Sen. Orrin Hatch
@@ -2652,6 +2661,11 @@ Sen. Joe Manchin
 Phone: 202–224–3954
 Email: Sen.Manchin@opencongress.org
 Twitter: @Sen_JoeManchin
+
+Rep. Joe Morelle
+Phone: 202-225-3615
+Email: Rep.Morelle@opencongress.org
+Twitter: @RepJoeMorelle
 
 Rep. David McKinley
 Phone: 202–225–4172

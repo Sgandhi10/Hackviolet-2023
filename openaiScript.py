@@ -12,7 +12,7 @@ response = openai.Completion.create(
   prompt=prompt,
   temperature=0
 )
-print(response['choices'][0]['text'])
+response['choices'][0]['text']
 
 subcommittees = "lil baby, drake, travis scott"
 prompt2 = "Given these political committees: " + subcommittees + "Rank the committees based on how relevant they are to the following text in a python-styled list like so x,y,z:" + paragraph
