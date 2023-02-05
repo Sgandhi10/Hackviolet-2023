@@ -57,6 +57,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from bs4 import BeautifulSoup as bs 
 import requests
+import urllib.request
+
 
 
 app = Flask(__name__)
@@ -89,17 +91,19 @@ def getDelegates():
 def webscraper():
     input_json = request.get_json()
     url = input_json['url']
-    print(url)
-    # load the projectpro webpage content 
-
-    r = requests.get(url) 
-# convert to beautiful soup 
-    soup = bs(r.content) 
-# printing our web page 
-    title_tag = soup.find_all('title')
+    
+    html = urllib.request.urlopen(url)
+    
+    htmlParse = bs(html, 'html.parser')
+    
+    s = ""
+    for para in htmlParse.find_all("p"):
+        s += para.get_text()
+    s = s[:1000]
+    print(s)
     # body_tag = str(soup.find_all('article'))
     # body_tag = body_tag.split()[:100]
-    return jsonify({url: url , 'title': title_tag})
+    return jsonify({url: url , 'body': s})
     
 if __name__ == '__main__':
     app.run()
@@ -107,3 +111,5 @@ if __name__ == '__main__':
 
     
 
+
+    
