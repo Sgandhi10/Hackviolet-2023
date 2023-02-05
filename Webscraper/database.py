@@ -32,6 +32,8 @@ for ind, row in df.iterrows():
     if row['Committee'] not in subcommittees.keys():
         subcommittees[row['Committee']] = set()
     if row['Subcommittee'] != 0:
+        if row['Subcommittee'] == None:
+            continue
         subcommittees[row['Committee']].add(row['Subcommittee'])
 # print(subcommittees)
 
@@ -141,14 +143,16 @@ def webscraper():
     print(committee)
 
     # from there, we will pass these committees into a method that gives sub committees for every committee
-    committee_list = committee.split(';')
+    committee_list = committee.split('; ')
     subcommittees_list = []
     for group in committee_list:
         print(group)
         try:
+            if group == None:
+                continue
             subcommittees_list += subcommittees[group.strip().replace("'","")]
         except:
-            print("Error: ", group.strip().replace("'",""), " not in subcommittees")
+            print("Error:", group.strip().replace("'",""), "not in Committees")
     print(subcommittees_list)
     # then open ai will rank the sub committeees, and output an ordered list of sub committees
     prompt2 = "Given these political committees: " + "; ".join(str(subcommittees_list)) + " Rank the committees based on how relevant they are to the following text in a python-styled list separated by commas like so x,y,z: " + paragraph
@@ -164,8 +168,10 @@ def webscraper():
     outputList = []
     for i in output:
         try:
-            name1 = df.loc[df['Subcommittee'] == i.strip().replace("'", "")]['Chair'].values[0]
-            name2 = df.loc[df['Subcommittee'] == i.strip().replace("'", "")]['Ranking Member'].values[0]
+            print(i.strip().replace("'", "").lower())
+            
+            name1 = df.loc[df['Subcommittee'].str.lower() == i.strip().replace("'", "").lower()]['Chair'].values[0]
+            name2 = df.loc[df['Subcommittee'].str.lower() == i.strip().replace("'", "").lower()]['Ranking Member'].values[0]
             if name1 in repInfo.keys():
                 outputList.append((name1, repInfo[name1][1], repInfo[name1][2]))
             if name2 in repInfo.keys():
